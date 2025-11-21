@@ -1,0 +1,6 @@
+@Quick_CommerceApiForEx_HostAddress = http://localhost:5236
+
+GET {{Quick_CommerceApiForEx_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
