@@ -22,9 +22,9 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection") 
     ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
-// ✅ Register DbContext with SQL Server
+// ✅ Register DbContext with PostgreSQL (for Render deployment)
 builder.Services.AddDbContext<QuickCommerceDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString));
 
 // ✅ Add controllers with cycle handling and FluentValidation
 builder.Services.AddControllers(options =>
