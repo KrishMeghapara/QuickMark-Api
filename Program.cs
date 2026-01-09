@@ -10,14 +10,21 @@ using Quick_CommerceApiForEx.Middleware;
 using Quick_CommerceApiForEx.Services;
 using dotenv.net;
 
-// Load environment variables from .env file
-DotEnv.Load();
+// Load environment variables from .env file (only in development)
+if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Production")
+{
+    DotEnv.Load();
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Register DbContext with local SQL Server
+// 🔧 Get connection string from environment variable or appsettings
+var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection") 
+    ?? builder.Configuration.GetConnectionString("DefaultConnection");
+
+// ✅ Register DbContext with SQL Server
 builder.Services.AddDbContext<QuickCommerceDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 // ✅ Add controllers with cycle handling and FluentValidation
 builder.Services.AddControllers(options =>
@@ -42,8 +49,15 @@ builder.Services.AddScoped<IGoogleAuthService, GoogleAuthService>();
 // Add Performance monitoring service
 builder.Services.AddScoped<Quick_CommerceApiForEx.Services.PerformanceService>();
 
+// 🔧 Get JWT settings from environment variables or appsettings
+var jwtKey = Environment.GetEnvironmentVariable("Jwt__Key") 
+    ?? builder.Configuration["Jwt:Key"];
+var jwtIssuer = Environment.GetEnvironmentVariable("Jwt__Issuer") 
+    ?? builder.Configuration["Jwt:Issuer"];
+var jwtAudience = Environment.GetEnvironmentVariable("Jwt__Audience") 
+    ?? builder.Configuration["Jwt:Audience"];
+
 // Add JWT authentication
-var jwtSettings = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -57,9 +71,9 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings["Issuer"],
-        ValidAudience = jwtSettings["Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey ?? ""))
     };
 });
 
@@ -75,21 +89,34 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ✅ Swagger only in Development
-if (app.Environment.IsDevelopment())
+// ✅ Enable Swagger in all environments for API testing
+app.UseSwagger();
+app.UseSwaggerUI();
+
+// 🏥 Health check endpoint for Render
+app.MapGet("/api/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }));
+
+// Only use HTTPS redirection in production with proper certificate
+if (!app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // Note: Render handles HTTPS termination, so we don't need UseHttpsRedirection
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles(); // Enable static file serving for wwwroot
+
+// Ensure uploads directory exists
+var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+if (!Directory.Exists(uploadsPath))
+{
+    Directory.CreateDirectory(uploadsPath);
+}
+
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(uploadsPath),
     RequestPath = "/uploads"
 });
+
 app.UseCors();
 app.UseAuthentication(); // Add this before UseAuthorization
 app.UseAuthorization();
