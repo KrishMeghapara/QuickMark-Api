@@ -42,9 +42,14 @@ namespace Quick_CommerceApiForEx.Controllers
             {
                 // Get user ID from JWT token
                 var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-                if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+                if (userIdClaim == null)
                 {
-                    return Unauthorized(new { message = "Invalid token." });
+                    return Unauthorized(new { message = "No user ID claim found in token." });
+                }
+                
+                if (!int.TryParse(userIdClaim.Value, out int userId))
+                {
+                    return Unauthorized(new { message = $"Invalid user ID format: {userIdClaim.Value}" });
                 }
 
                 var cartItems = await _context.Carts
@@ -57,7 +62,8 @@ namespace Quick_CommerceApiForEx.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = $"Error retrieving cart: {ex.Message}" });
+                var innerMessage = ex.InnerException?.Message ?? "No inner exception";
+                return StatusCode(500, new { message = $"Error retrieving cart: {ex.Message}", inner = innerMessage });
             }
         }
 
@@ -69,9 +75,28 @@ namespace Quick_CommerceApiForEx.Controllers
             {
                 // Get user ID from JWT token
                 var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-                if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+                if (userIdClaim == null)
                 {
-                    return Unauthorized(new { message = "Invalid token." });
+                    return Unauthorized(new { message = "No user ID claim found in token." });
+                }
+                
+                if (!int.TryParse(userIdClaim.Value, out int userId))
+                {
+                    return Unauthorized(new { message = $"Invalid user ID format: {userIdClaim.Value}" });
+                }
+
+                // Verify user exists
+                var userExists = await _context.Users.AnyAsync(u => u.UserID == userId);
+                if (!userExists)
+                {
+                    return NotFound(new { message = $"User with ID {userId} not found in database." });
+                }
+
+                // Verify product exists
+                var productExists = await _context.Products.AnyAsync(p => p.ProductID == dto.ProductID);
+                if (!productExists)
+                {
+                    return NotFound(new { message = $"Product with ID {dto.ProductID} not found." });
                 }
 
                 var existingItem = await _context.Carts
@@ -80,7 +105,7 @@ namespace Quick_CommerceApiForEx.Controllers
                 if (existingItem != null)
                 {
                     existingItem.Quantity += dto.Quantity;
-                    existingItem.AddedAt = DateTime.Now;
+                    existingItem.AddedAt = DateTime.UtcNow;
                     _context.Update(existingItem);
                 }
                 else
@@ -90,7 +115,7 @@ namespace Quick_CommerceApiForEx.Controllers
                         UserID = userId,
                         ProductID = dto.ProductID,
                         Quantity = dto.Quantity,
-                        AddedAt = DateTime.Now
+                        AddedAt = DateTime.UtcNow
                     };
                     _context.Carts.Add(cartItem);
                 }
@@ -100,7 +125,8 @@ namespace Quick_CommerceApiForEx.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = $"Error adding to cart: {ex.Message}" });
+                var innerMessage = ex.InnerException?.Message ?? "No inner exception";
+                return StatusCode(500, new { message = $"Error adding to cart: {ex.Message}", inner = innerMessage });
             }
         }
 
