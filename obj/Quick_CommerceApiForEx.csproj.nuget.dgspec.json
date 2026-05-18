@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\asp proj\\Quick-CommerceApiForEx\\Quick_CommerceApiForEx.csproj": {}
+    "D:\\QuickMart-Project\\QuickMart-API\\Quick_CommerceApiForEx.csproj": {}
   },
   "projects": {
-    "D:\\asp proj\\Quick-CommerceApiForEx\\Quick_CommerceApiForEx.csproj": {
+    "D:\\QuickMart-Project\\QuickMart-API\\Quick_CommerceApiForEx.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\asp proj\\Quick-CommerceApiForEx\\Quick_CommerceApiForEx.csproj",
+        "projectUniqueName": "D:\\QuickMart-Project\\QuickMart-API\\Quick_CommerceApiForEx.csproj",
         "projectName": "Quick_CommerceApiForEx",
-        "projectPath": "D:\\asp proj\\Quick-CommerceApiForEx\\Quick_CommerceApiForEx.csproj",
+        "projectPath": "D:\\QuickMart-Project\\QuickMart-API\\Quick_CommerceApiForEx.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\asp proj\\Quick-CommerceApiForEx\\obj\\",
+        "outputPath": "D:\\QuickMart-Project\\QuickMart-API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Microsoft VS\\Shared\\NuGetPackages"
