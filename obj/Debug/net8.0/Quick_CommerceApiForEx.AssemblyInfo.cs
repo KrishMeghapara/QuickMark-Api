@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Quick_CommerceApiForEx")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce7f01867149dec0e847dde6a8cd58cc2892d619")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a0acc197314acf9d1da824444bba76ac76ec6193")]
 [assembly: System.Reflection.AssemblyProductAttribute("Quick_CommerceApiForEx")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Quick_CommerceApiForEx")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
