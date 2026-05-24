@@ -13,37 +13,37 @@ Backend API for QuickMart - A Quick Commerce Platform delivering groceries in 12
 ## 📋 Features
 
 ### Authentication & Authorization
-- ✅ JWT Token-based authentication
-- ✅ Google OAuth 2.0 integration
-- ✅ User registration and login
-- ✅ Password change functionality
-- ✅ Secure token management
+- JWT Token-based authentication
+- Google OAuth 2.0 integration
+- User registration and login
+- Password change functionality
+- Secure token management
 
 ### User Management
-- ✅ User profile management
-- ✅ Profile picture upload
-- ✅ Address management (CRUD operations)
-- ✅ Multiple address support
-- ✅ Default address selection
+- User profile management
+- Profile picture upload
+- Address management (CRUD operations)
+- Multiple address support
+- Default address selection
 
 ### Product Management
-- ✅ Product CRUD operations
-- ✅ Category-based product filtering
-- ✅ Product search functionality
-- ✅ Product image management
-- ✅ Stock management
+- Product CRUD operations
+- Category-based product filtering
+- Product search functionality
+- Product image management
+- Stock management
 
 ### Order Management
-- ✅ Order creation and tracking
-- ✅ Order history
-- ✅ Order status updates
-- ✅ Order items management
+- Order creation and tracking
+- Order history
+- Order status updates
+- Order items management
 
 ### Cart Management
-- ✅ Add/Remove items from cart
-- ✅ Update cart quantities
-- ✅ Cart persistence
-- ✅ Cart total calculation
+- Add/Remove items from cart
+- Update cart quantities
+- Cart persistence
+- Cart total calculation
 
 ## 🚀 Getting Started
 
@@ -307,7 +307,7 @@ Authorization: Bearer {token}
 - **OrderItems** - Order line items
 - **Cart** - Shopping cart items
 
-## 🔒 Security
+## Security
 
 - JWT token-based authentication
 - Password hashing with BCrypt

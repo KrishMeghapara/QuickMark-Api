@@ -15,7 +15,7 @@ namespace Quick_CommerceApiForEx.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/ProductReview
+        // GET: api/ProductReview
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductReview>>> GetAllReviews()
         {
@@ -26,7 +26,7 @@ namespace Quick_CommerceApiForEx.Controllers
                 .ToListAsync();
         }
 
-        // ✅ GET: api/ProductReview/Product/5
+        // GET: api/ProductReview/Product/5
         [HttpGet("Product/{productId}")]
         public async Task<ActionResult<IEnumerable<ProductReview>>> GetByProduct(int productId)
         {
@@ -43,7 +43,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(reviews);
         }
 
-        // ✅ POST: api/ProductReview
+        // POST: api/ProductReview
         [HttpPost]
         public async Task<ActionResult> AddReview(ProductReview review)
         {
@@ -62,7 +62,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok("Review added.");
         }
 
-        // ✅ PUT: api/ProductReview/5
+        // PUT: api/ProductReview/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateReview(int id, ProductReview updatedReview)
         {
@@ -82,7 +82,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok("Review updated.");
         }
 
-        // ✅ DELETE: api/ProductReview/5
+        // DELETE: api/ProductReview/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReview(int id)
         {

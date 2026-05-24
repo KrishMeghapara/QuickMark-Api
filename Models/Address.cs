@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization; // ✅ Required for JsonIgnore
+using System.Text.Json.Serialization; // Required for JsonIgnore
 using QuickCommerceAPI.Models;
 
 [Table("Address")]

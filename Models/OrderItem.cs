@@ -18,7 +18,7 @@ public class OrderItem
     public int Quantity { get; set; }
     public decimal PriceAtTime { get; set; }
 
-    // 🔒 Avoid circular reference issues
+    // Avoid circular reference issues
     [JsonIgnore]
     public Order? Order { get; set; }
 

@@ -16,7 +16,7 @@ namespace Quick_CommerceApiForEx.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/Product
+        // GET: api/Product
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetAll()
         {
@@ -24,7 +24,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(products);
         }
 
-        // ✅ GET: api/Product/Filter
+        // GET: api/Product/Filter
         [HttpGet("Filter")]
         public async Task<ActionResult<IEnumerable<Product>>> Filter([FromQuery] ProductFilterDTO filter)
         {
@@ -59,7 +59,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(products);
         }
 
-        // ✅ GET: api/Product/5
+        // GET: api/Product/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetById(int id)
         {
@@ -72,7 +72,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(product);
         }
 
-        // ✅ POST: api/Product
+        // POST: api/Product
         [HttpPost]
         public async Task<ActionResult<Product>> Create([FromBody] CreateProductDTO dto)
         {
@@ -101,7 +101,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ PUT: api/Product/5
+        // PUT: api/Product/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateProductDTO dto)
         {
@@ -136,7 +136,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ DELETE: api/Product/5
+        // DELETE: api/Product/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -150,7 +150,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(new { message = "Product deleted successfully." });
         }
 
-        // ✅ GET: api/Product/ByCategory/2
+        // GET: api/Product/ByCategory/2
         [HttpGet("ByCategory/{categoryId}")]
         public async Task<ActionResult<IEnumerable<Product>>> GetByCategory(int categoryId)
         {
@@ -170,7 +170,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(products);
         }
 
-        // ✅ GET: api/Product/Search?query=apple
+        // GET: api/Product/Search?query=apple
         [HttpGet("Search")]
         public async Task<ActionResult<IEnumerable<Product>>> Search([FromQuery] string query)
         {
@@ -189,7 +189,7 @@ namespace Quick_CommerceApiForEx.Controllers
 
 
 
-        // ✅ GET: api/Product/PriceRange
+        // GET: api/Product/PriceRange
         [HttpGet("PriceRange")]
         public async Task<ActionResult> GetPriceRange()
         {

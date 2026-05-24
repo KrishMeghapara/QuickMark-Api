@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuickCommerceAPI.Models;
-using System.Text.Json.Serialization; // 🔁 Needed for ReferenceHandler
+using System.Text.Json.Serialization; // Needed for ReferenceHandler
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -18,21 +18,21 @@ if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Production"
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔧 Get connection string from environment variable or appsettings
+//  Get connection string from environment variable or appsettings
 var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection") 
     ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
-// ✅ Register DbContext with SQL Server (local development)
+//  Register DbContext with SQL Server (local development)
 builder.Services.AddDbContext<QuickCommerceDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// ✅ Add controllers with cycle handling and FluentValidation
+//  Add controllers with cycle handling and FluentValidation
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<GlobalExceptionHandler>();
 })
 .AddJsonOptions(x =>
-    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles) // 🔁 FIX for circular reference
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles) // FIX for circular reference
 .AddFluentValidation(fv => 
 {
     fv.RegisterValidatorsFromAssemblyContaining<LoginDTOValidator>();
@@ -49,7 +49,7 @@ builder.Services.AddScoped<IGoogleAuthService, GoogleAuthService>();
 // Add Performance monitoring service
 builder.Services.AddScoped<Quick_CommerceApiForEx.Services.PerformanceService>();
 
-// 🔧 Get JWT settings from environment variables or appsettings
+//  Get JWT settings from environment variables or appsettings
 var jwtKey = Environment.GetEnvironmentVariable("Jwt__Key") 
     ?? builder.Configuration["Jwt:Key"];
 var jwtIssuer = Environment.GetEnvironmentVariable("Jwt__Issuer") 
@@ -89,11 +89,11 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ✅ Enable Swagger in all environments for API testing
+//  Enable Swagger in all environments for API testing
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// 🏥 Health check endpoint for Render
+//  Health check endpoint for Render
 app.MapGet("/api/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }));
 
 // Only use HTTPS redirection in production with proper certificate

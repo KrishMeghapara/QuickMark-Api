@@ -15,7 +15,7 @@ namespace Quick_CommerceApiForEx.Controllers
             _context = context;
         }
 
-        // ✅ POST: api/Order/BuyNow
+        // POST: api/Order/BuyNow
         [HttpPost("BuyNow")]
         public async Task<IActionResult> BuyNow([FromBody] BuyNowDTO dto)
         {
@@ -62,7 +62,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ GET: api/Order/User/3
+        // GET: api/Order/User/3
         [HttpGet("User/{userId}")]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByUser(int userId)
         {
@@ -80,7 +80,7 @@ namespace Quick_CommerceApiForEx.Controllers
         }
     }
 
-    // ✅ DTOs
+    // DTOs
     public class BuyNowDTO
     {
         public int UserID { get; set; }

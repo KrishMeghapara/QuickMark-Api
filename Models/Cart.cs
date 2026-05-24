@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization; // ✅ Required for JsonIgnore
+using System.Text.Json.Serialization; // Required for JsonIgnore
 using QuickCommerceAPI.Models;
 
 [Table("Cart")]
@@ -21,5 +21,5 @@ public class Cart
 
     public int Quantity { get; set; }
 
-    public DateTime AddedAt { get; set; } = DateTime.UtcNow; // 🕒 Default value
+    public DateTime AddedAt { get; set; } = DateTime.UtcNow; // Default value
 }

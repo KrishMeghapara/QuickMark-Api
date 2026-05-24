@@ -17,14 +17,14 @@ namespace Quick_CommerceApiForEx.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/Address
+        // GET: api/Address
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Address>>> GetAll()
         {
             return await _context.Addresses.ToListAsync();
         }
 
-        // ✅ GET: api/Address/5
+        // GET: api/Address/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Address>> GetById(int id)
         {
@@ -36,7 +36,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return address;
         }
 
-        // ✅ GET: api/Address/User/3
+        // GET: api/Address/User/3
         [HttpGet("User/{userId}")]
         public async Task<ActionResult<IEnumerable<Address>>> GetByUserId(int userId)
         {
@@ -50,7 +50,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(user.Address);
         }
 
-        // ✅ POST: api/Address
+        // POST: api/Address
         [HttpPost]
         public async Task<ActionResult<Address>> Create(Address address)
         {
@@ -141,7 +141,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(address);
         }
 
-        // ✅ PUT: api/Address/5
+        // PUT: api/Address/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Address address)
         {
@@ -165,7 +165,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok("Address updated.");
         }
 
-        // ✅ DELETE: api/Address/5
+        // DELETE: api/Address/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

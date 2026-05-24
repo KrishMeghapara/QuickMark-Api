@@ -31,7 +31,7 @@ namespace Quick_CommerceApiForEx.Controllers
             _googleAuthService = googleAuthService;
         }
 
-        // ✅ POST: api/User/Register
+        // POST: api/User/Register
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
@@ -106,7 +106,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ POST: api/User/Login
+        // POST: api/User/Login
         [HttpPost("Login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDTO dto)
@@ -139,7 +139,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(new { Token = jwtToken, user.UserID, user.UserName, user.Email });
         }
 
-        // ✅ POST: api/User/GoogleLogin
+        // POST: api/User/GoogleLogin
         [HttpPost("GoogleLogin")]
         [AllowAnonymous]
         public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginDTO dto)
@@ -225,14 +225,14 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ GET: api/User
+        // GET: api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             return await _context.Users.Include(u => u.Address).ToListAsync();
         }
 
-        // ✅ GET: api/User/5
+        // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserById(int id)
         {
@@ -246,7 +246,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return user;
         }
 
-        // ✅ PUT: api/User/5
+        // PUT: api/User/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDTO dto)
         {
@@ -272,7 +272,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ DELETE: api/User/5
+        // DELETE: api/User/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
@@ -286,7 +286,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(new { message = "User deleted successfully." });
         }
 
-        // ✅ GET: api/User/Profile
+        // GET: api/User/Profile
         [HttpGet("Profile")]
         [Authorize]
         public async Task<ActionResult<User>> GetCurrentUserProfile()
@@ -315,7 +315,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ POST: api/User/ChangePassword
+        // POST: api/User/ChangePassword
         [HttpPost("ChangePassword")]
         [Authorize]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO dto)
@@ -351,7 +351,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ GET: api/User/ValidateToken
+        // GET: api/User/ValidateToken
         [HttpGet("ValidateToken")]
         [Authorize]
         public IActionResult ValidateToken()
@@ -361,7 +361,7 @@ namespace Quick_CommerceApiForEx.Controllers
         }
 
 
-        // ✅ POST: api/User/UploadProfilePicture
+        // POST: api/User/UploadProfilePicture
         [HttpPost("UploadProfilePicture")]
         [Authorize]
         public async Task<ActionResult<ProfilePictureResponseDTO>> UploadProfilePicture(IFormFile file)
@@ -461,7 +461,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ DELETE: api/User/RemoveProfilePicture
+        // DELETE: api/User/RemoveProfilePicture
         [HttpDelete("RemoveProfilePicture")]
         [Authorize]
         public async Task<ActionResult<ProfilePictureResponseDTO>> RemoveProfilePicture()

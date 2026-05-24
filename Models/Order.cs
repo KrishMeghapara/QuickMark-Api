@@ -23,14 +23,14 @@ namespace QuickCommerceAPI.Models
         public DateTime OrderDate { get; set; }
 
         // Navigation properties
-        [JsonIgnore] // 🔄 Add this if User causes cycles or validation issues
+        [JsonIgnore] // Add this if User causes cycles or validation issues
         public User? User { get; set; }
 
-        [JsonIgnore] // 🔄 Add this if Address causes cycles or validation issues
+        [JsonIgnore] // Add this if Address causes cycles or validation issues
         public Address? Address { get; set; }
 
-        // ✅ Always safe to initialize collection
-        [JsonIgnore] // 🔄 Optional: prevent sending deep nested data unless needed
+        // Always safe to initialize collection
+        [JsonIgnore] // Optional: prevent sending deep nested data unless needed
         public ICollection<OrderItem>? Items { get; set; } = new List<OrderItem>();
     }
 }

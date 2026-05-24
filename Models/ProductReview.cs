@@ -24,7 +24,7 @@ namespace QuickCommerceAPI.Models
 
         public DateTime? UpdatedAt { get; set; }
 
-        // 🔒 Prevent circular serialization
+        // Prevent circular serialization
         [JsonIgnore]
         public Product? Product { get; set; }
 

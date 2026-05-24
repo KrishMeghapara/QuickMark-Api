@@ -18,7 +18,7 @@ namespace Quick_CommerceApiForEx.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/Cart/User/3
+        // GET: api/Cart/User/3
         [HttpGet("User/{userId}")]
         public async Task<ActionResult<IEnumerable<Cart>>> GetCartByUserId(int userId)
         {
@@ -34,7 +34,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(cartItems);
         }
 
-        // ✅ GET: api/Cart/MyCart
+        // GET: api/Cart/MyCart
         [HttpGet("MyCart")]
         public async Task<ActionResult<IEnumerable<Cart>>> GetMyCart()
         {
@@ -67,7 +67,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ POST: api/Cart/Add
+        // POST: api/Cart/Add
         [HttpPost("Add")]
         public async Task<IActionResult> AddToCart([FromBody] AddToCartDTO dto)
         {
@@ -130,7 +130,7 @@ namespace Quick_CommerceApiForEx.Controllers
             }
         }
 
-        // ✅ PUT: api/Cart/UpdateQty
+        // PUT: api/Cart/UpdateQty
         [HttpPut("UpdateQty")]
         public async Task<IActionResult> UpdateQuantity([FromBody] UpdateCartQuantityDTO dto)
         {
@@ -145,7 +145,7 @@ namespace Quick_CommerceApiForEx.Controllers
             return Ok(new { message = "Quantity updated successfully." });
         }
 
-        // ✅ DELETE: api/Cart/Remove/5
+        // DELETE: api/Cart/Remove/5
         [HttpDelete("Remove/{cartId}")]
         public async Task<IActionResult> RemoveFromCart(int cartId)
         {
